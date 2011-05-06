@@ -1,7 +1,6 @@
 pragma( lib, "liballegro5.lib" );
 pragma( lib, "libdallegro5.lib" );
-pragma( lib, "jeca.lib" );
-pragma( lib, "misc.lib" );
+pragma( lib, "libjeca.lib" );
 
 import std.stdio;
 
@@ -43,7 +42,17 @@ int main() {
 
    al_start_timer(timer);
    
-   // todo: do run area
+   auto exit = false;
+   real x = 0, size = 50;
+   do {
+	   al_draw_filled_circle( x, 100, size, al_map_rgb( 0,0,0 ) );
+	   ++x;
+	   size -= 0.07;
+	   al_draw_filled_circle( x, 100, size, al_map_rgb( 255, 180 , 0 ) );
+	   al_flip_display;
+	   if ( al_get_timer_count( timer ) == 20 )
+			exit = true;
+   } while( ! exit );
 
    al_destroy_event_queue(queue);
 
