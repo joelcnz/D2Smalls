@@ -1,0 +1,1 @@
+// Off IDE onetemplate Hanoi(int n, char a, char b, char c){ static if(n>0) enum Hanoi = Hanoi!(n-1,a,c,b) ~ a ~ "->" ~ b ~ Hanoi!(n-1,c,b,a); else enum Hanoi = "\n";}pragma(msg,Hanoi!(5,'A','B','C'));void main() {}
