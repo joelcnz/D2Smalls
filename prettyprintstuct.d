@@ -24,8 +24,9 @@ void main()
 	foreach ( fieldv; values) {
 		string field = format("%s", fieldv );
 		if ( field.length > maxWidth )
-			maxWidth = field.length + 3; //#would've though 1 and not 3
+			maxWidth = field.length;
 	}
+	 maxWidth += 3; //#would've thought 1 and not 3
 	
     foreach (index, value; values)
     {
