@@ -31,7 +31,7 @@ int main() {
 
 
 
-	auto FPS = 50;
+	auto FPS = 60;
    timer = al_create_timer(1.000 / FPS);
 
    auto queue = al_create_event_queue();
@@ -54,6 +54,9 @@ int main() {
 			exit = true;
    } while( ! exit );
 
+   writeln( typeid( typeof( al_get_timer_count( timer ) ) ) );
+   writeln( is( typeof( al_get_timer_count( timer ) ) == long ) ? "Long it is" : "but it is long" );
+   
    al_destroy_event_queue(queue);
 
    return 0;

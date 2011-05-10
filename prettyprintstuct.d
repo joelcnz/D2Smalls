@@ -26,7 +26,7 @@ void main()
 		if ( field.length > maxWidth )
 			maxWidth = field.length;
 	}
-	 maxWidth += 3; //#would've thought 1 and not 3
+	maxWidth += 3; //#would've thought 1 and not 3
 	
     foreach (index, value; values)
     {
