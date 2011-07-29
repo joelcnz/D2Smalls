@@ -1,5 +1,6 @@
 //#foreach(q, i, t; thg)
 import std.stdio;
+import std.algorithm;
 
 class Thing {
 	string[] names;
@@ -33,7 +34,7 @@ class Thing {
         int result = 0;
 
         for (int i = 0; i < names.length; i++) {
-            result = dg(names[i][1], i, names[i]);
+            result = dg(names[i][1], i, names[i]); // names[i][1] - 1 to skip the '*'
             if (result)
                 break;
         }
@@ -55,6 +56,44 @@ class Thing2Man(T) {
 		_head = thg2;
 
 		return this;
+	}
+	
+	size_t length() {
+		auto current = _head;
+		int i = 0;
+		while( current !is null ) {
+			i++;
+			current = current.next;
+		}
+		
+		return i;
+	}
+	
+	T opIndex( size_t iTarg ) {
+		auto current = _head;
+		size_t i = 0;
+		while( current !is null ) {
+			if ( i == iTarg )
+				break;
+			i++;
+			current = current.next;
+		}
+		
+		return current;
+	}
+	
+	void doSort() {
+		T[] arr;
+		auto current = _head;
+		while( current !is null ) {
+			arr ~= current;
+			current = current.next;
+		}
+		
+		sort!"a > b"( arr ); // gets swapped with add( item )
+		_head = null;
+		foreach( item; arr )
+			add( item );
 	}
 	
 	int opApply(int delegate(ref T) dg) {
@@ -79,6 +118,24 @@ class SomeThing2 {
 	{
 		write("#");
 	}
+
+	override int opCmp( Object obj ) {
+		auto a = c;
+		auto conv = cast( typeof( this ) )obj;
+		auto b = conv.c;
+		void toLower( ref char l ) {
+			if ( l >= 'A' && l <= 'Z' )
+				l = cast(char)('a' + l - 'A');
+		}
+		foreach( l; [&a, &b] )
+			toLower( *l );
+			
+		if ( a < b )
+			return -1;
+		else if ( a > b )
+			return 1;
+		return 0;
+	}
 }
 
 class Thing2 : SomeThing2 {
@@ -87,7 +144,7 @@ class Thing2 : SomeThing2 {
 	}
 	override void print() {
 		write(c);
-	}	
+	}
 }
 
 void main() {
@@ -117,11 +174,25 @@ void main() {
 	auto thg2man = new Thing2Man!SomeThing2;
 	foreach (c; "hsimaH")
 		thg2man.add( new Thing2( c ) );
-	thg2man.add( new Thing2( ' ' ) ).
-			add( new Thing2( 'm' ) ).
+	with( thg2man )
+		add( new Thing2( ' ' ) ),
+		add( new Thing2( 'y' ) ),
+		add( new Thing2( 'h' ) ),
+		add( new Thing2( 't' ) ),
+		add( new Thing2( 'o' ) );
+	thg2man.add( new Thing2( 'm' ) ).
 			add( new Thing2( 'i' ) ).
 			add( new Thing2( 'T' ) );
-	foreach (t2; thg2man) {
+	foreach (t2; thg2man ) {
 		t2.print;
 	}
+	writeln( "\nGet length and indexing: " );
+	foreach( i; 0 .. thg2man.length )
+		thg2man[ i ].print;
+	write( "\nNow sort:" );
+	thg2man.doSort;
+	foreach (t2; thg2man ) {
+		t2.print;
+	}
+	writeln();
 }

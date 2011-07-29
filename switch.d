@@ -1,5 +1,4 @@
 import std.stdio;
-import misc;
 
 void main()
 {
@@ -15,4 +14,22 @@ void main()
 			writeln("Nop.");
 		break;
 	}
+
+version( none ) {
+	//not work - as follows
+   string foo = "foo";
+   string bar = "bar";
+   string mrX;
+   switch (mrX)
+   {
+      case foo:
+         writeln(foo);
+         break;
+      case bar:
+         writeln(bar);
+         break;
+      default:
+         writeln("who knows");
+   }
+}
 }

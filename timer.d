@@ -1,3 +1,5 @@
+module timer;
+
 pragma( lib, "liballegro5.lib" );
 pragma( lib, "libdallegro5.lib" );
 pragma( lib, "libjeca.lib" );
@@ -8,12 +10,13 @@ import jeca.all;
 
 int main() {
 	scope( success ) { writeln( "Exit was successful." ); }
+	scope( failure ) { writeln( "Exit was a failure." ); }
 	
-   ALLEGRO_DISPLAY *display;
-   ALLEGRO_TIMER *timer;
+   ALLEGRO_DISPLAY* display;
+   ALLEGRO_TIMER* timer;
 
-   if (!al_init()) {
-      writeln("Could not init Allegro.\n");
+   if ( ! al_init() ) {
+      writeln( "Could not init Allegro.\n" );
       return 1;
    }
    
@@ -28,8 +31,6 @@ int main() {
       writeln("Could not create display.\n");
       return 1;
    }
-
-
 
 	auto FPS = 60;
    timer = al_create_timer(1.000 / FPS);

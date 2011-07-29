@@ -1,12 +1,12 @@
 import std.stdio: writeln;
 import std.conv: to;
-import std.string: toupper;
+import std.string: toupper, format;
 
 string toUpper(string str) {
 	return toupper(str);
 }
 
-int[] add(int[] nums, int plus)
+int[] addAll(int[] nums, int plus)
 {
 	foreach ( ref num; nums )
 	{
@@ -16,8 +16,10 @@ int[] add(int[] nums, int plus)
 }
 
 void main() {
-	writeln("cattin"[0..3] ~ to!string("house".length), ' ', "catten".toUpper, ' ', [ 2, 6, -31 ].add( 1 ) );
+	assert( "cattin"[ 0 .. 3 ] ~ to!string("house".length) ~ ' ' ~
+		"catten".toUpper ~ ' ' ~ to!string( [ 2, 6, 30 ].addAll( 1 ) ) ==
+		"cat5 CATTEN [3, 7, 29]" );
 	string hat = `[hat]`;
-	writeln( hat[ 0 ], hat[ $ - 1 ] );
-	writeln(hat[1 .. $ - 1]);
+	assert( format( "%s%s", hat[ 0 ], hat[ $ - 1 ] ) == "[]" );
+	assert( hat[ 1 .. $ - 1 ] == "hat" );
 }

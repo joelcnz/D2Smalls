@@ -40,6 +40,8 @@ struct Num {
 }
 
 void main() {
+	writeln( "int.max: ", int.max ); //, ' ', int. );
+	
 	Num a;
 
 	a = 3;

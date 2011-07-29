@@ -4,15 +4,14 @@ import std.stdio;
 class Number {
 	private int _num;
 	@property
-	void num(int num0) { _num = num0; }
-	@property
-	int num() { return _num; }
+	ref int num() { return _num; }
 }
 
 void main() {
 	auto number = new Number;
-	number.num = 5;
-	writeln(number.num);
-	number.num = 7;
-	writeln(number.num);
+	number.num += 5;
+	assert( number.num == 5 );
+	number.num -= 2;
+	assert( number.num == 3 );
+	writeln( "All tests passed!" );
 }
