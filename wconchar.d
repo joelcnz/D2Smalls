@@ -11,5 +11,5 @@ null);
 }
 
 void main() {
-	writeln(ansi("");
+	writeln(ansi(""));
 }
