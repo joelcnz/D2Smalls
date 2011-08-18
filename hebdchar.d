@@ -1,8 +1,10 @@
+//#I normally avoid file stream
 //#file class things don't have a get filename option
 // Some is copied from some where the first two sigifcant lines
 import std.stdio;
 import std.stream;
 import std.string;
+import std.array;
 
 void main() {
   dchar w_sonderzeichen= '\u20ac';    // Euro Zeichen
@@ -18,6 +20,7 @@ void main() {
 	dchar start='\u05D0'; // Alef
 	int i=0;
 	auto fileName = "Hebrew.txt"; //#file class things don't have a get filename option
+	//#I normally avoid file stream
 	Stream file = new BufferedFile(fileName, FileMode.Out); // out to a text file
 	foreach (dchar letter; start .. start + names.length) {
 		stdout.writefln("%-12s [%s]", names[i++], letter);
@@ -27,7 +30,7 @@ void main() {
 	writeln("Written file: ", fileName);
 }
 
-/// And the iron rusts and the grass and bushes grow up around in and out of the machinary left for dead
+// And the iron rusts and the grass and bushes grow up around in and out of the machinary left for dead, yes, they were always dead from the beginning
 /+
 import std.stdio;
 import std.string;

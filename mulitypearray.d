@@ -1,6 +1,6 @@
 module mulitypearray;
 
-import std.stdio;
+import std.stdio, std.string;
 
 void main() {
 	alias Object O;
@@ -21,6 +21,10 @@ void main() {
 			break;
 		}
 	writeln((cast(C)objs[2]).realnum);
+	
+	foreach( index; 0 .. 10 )
+		writeln( "A cow was found by the light of the moon".split[ index .. index + 2 ] ),
+		++index;
 }
 
 class A {

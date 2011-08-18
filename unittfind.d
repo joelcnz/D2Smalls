@@ -1,14 +1,14 @@
 /**
 	file: unitt.d
 	Date: 17.07.'10
-	Unit test program, (look no main)
-	dmdr --main unit.d (not work, asks about 16 bit)
+	comment: Unit test program, (look no main)
+	rdmd --main -unittest unit.d
 */
 module unitt;
 
 import std.stdio;
 
-void main() {}
+//void main() {}
 
 unittest {
 	int[] nums = [];

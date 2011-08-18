@@ -1,3 +1,46 @@
+//#more
+
+string EnumDefAsString(T)() if (is(T == enum)) {
+    string result = "";
+    foreach (e; __traits(allMembers, T)) {
+        result ~= e ~ " = T." ~ e ~ ",";
+    }
+    return result;
+}
+
+template ExtendEnum(T, string s) if (is(T == enum) && is(typeof({mixin("enum a{"~s~"}");}))) {
+    mixin("enum ExtendEnum {" ~
+        EnumDefAsString!T() ~ s ~
+    "}");
+}
+
+unittest {
+    enum bar {
+        a = 1,
+        b = 7,
+        c = 19
+    }
+
+    import std.typetuple;
+
+    alias ExtendEnum!(bar, q{ // Usage example here.
+        d = 25
+    }) bar2;
+
+    foreach (i, e; __traits(allMembers, bar2)) {
+        static assert( e == TypeTuple!("a", "b", "c", "d")[i] );
+    }
+
+    assert( bar2.a == bar.a );
+    assert( bar2.b == bar.b );
+    assert( bar2.c == bar.c );
+    assert( bar2.d == 25 );
+
+    static assert(!is(typeof( ExtendEnum!(int, "a"))));
+    static assert(!is(typeof( ExtendEnum!(bar, "25"))));
+} 
+
+//#more
 import std.stdio;
 import std.conv;
 import std.traits;

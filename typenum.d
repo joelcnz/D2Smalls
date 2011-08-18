@@ -1,5 +1,12 @@
 import std.stdio;
 
+// here just for 'typeof(return)'
+uint retValue() {
+	typeof(return) number = 1979;
+	
+	return number;
+}
+
 class Number(T) {
 	private T _var;
 	void opAddAssign(T var) {
@@ -18,6 +25,8 @@ class Number(T) {
 				break;
 				case 10: .. case 99:
 					_var *= 100;
+				break;
+				default:
 				break;
 			}
 			_var += var0;

@@ -1,4 +1,6 @@
+import std.stdio;
 import std.c.windows.windows;
+import std.utf;
 
 string ansi(string str)
 {

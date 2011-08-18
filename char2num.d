@@ -3,7 +3,7 @@ import std.string;
 
 void main() {
 	writeln( "Part One:" );
-	foreach( card; "WINDOWS96 BILLGATES".split ) {
+	foreach( card; "WINDOWS96 BILLGATES TIMOTHY JESUSCHRIST!".split ~ "The Way" ) {
 		compute( card );
 	}
 	while( compute( stripRight( readln ) ) ) {}
@@ -16,7 +16,9 @@ void main() {
 }
 
 auto compute( string input ) {
-	if ( input.length > 0 && input[0] == 'q' || input[0] == 'Q' )
+	if ( input.length == 0 )
+		return true;
+	if ( input[0] == 'q' || input[0] == 'Q' )
 		return false;
 	int total = 0;
 	foreach( c; input )
@@ -30,7 +32,9 @@ auto compute( string input ) {
 }
 
 auto compute6( string input ) {
-	if ( input.length > 0 && input[0] == 'q' || input[0] == 'Q' )
+	if ( input.length == 0 )
+		return true;
+	if ( input[0] == 'q' || input[0] == 'Q' )
 		return false;
 	writeln( "Use capitals:" );
 	int total = 0;

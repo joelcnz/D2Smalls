@@ -1,8 +1,66 @@
-import std.stdio;
+//Org: from Philippe Sigauad 9 Aug 2011 8:50 ng d.D.learn (not counting the user input stuff
+import std.stdio, std.typecons, std.conv;
+
+string generateSwitches(T...)()
+{
+    string result = "switch(x) {\n";
+    foreach(i,Type; T)
+    {
+        result ~= "case " ~ to!string(i) ~ ":\n"
+                ~ "fun(tup[" ~ to!string(i) ~ "]);\n"
+                ~ "break;\n";
+    }
+    return result ~ "default:\n"
+                  ~ "assert(0, q{Bad index: } ~ to!string(x));\n}";
+}
+
+void actOnTuple(alias fun, T...)(int x, ref Tuple!T tup)
+{
+    mixin(generateSwitches!(T));
+}
+
+void foo(T)(ref T t) { writeln(t); t = T.init;}
 
 void main()
 {
-	writeln("Enter a charater:");
+	goto Awesome;
+	
+    auto tup = tuple(1, 3.14, "abc");
+    auto x = 1;
+    actOnTuple!foo(x, tup);
+    writeln(tup);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Awesome:
+	class AwesomeNess {}
+	
+	auto Hamish = new AwesomeNess;
+	auto awesome = Hamish;
+
+	if ( Hamish is awesome )
+		writeln( "Hamish is awesome!" );
+	else
+		writeln( "Hamish isn't awesome!" );
+
+	return;
+
+	writeln("Enter a character:");
 	char input = readln[0]; // 0 .. $ - 1 ];
 	switch (input)
 	{
@@ -15,7 +73,7 @@ void main()
 		break;
 	}
 
-version( none ) {
+version( all ) {
 	//not work - as follows
    string foo = "foo";
    string bar = "bar";
